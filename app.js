@@ -1,20 +1,22 @@
 const http = require('http');
+const util = require('util');
 
-const server = http.createServer((req, res) => {
-    if (req.url === '/') {
-        res.writeHead(200, { 'Content-Typr': 'text/plain' });
-        res.end('Welcome to the homepage!');
-    } else if (req.url === '/about') {
-        res.writeHead(200, { 'Content-Typr': 'text/plain' });
-        res.end('This is about page.');
-    } else {
-        res.writeHead(404, { 'Content-Typr': 'text/plain' });
-        res.end('404 Not Found');
-    }
-});
+http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
 
-const PORT = 3000;
-server.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+    const myUrl = new URL(req.url, `http://${req.headers.host}`);
+
+    res.end(util.inspect({
+        href: myUrl.href,
+        origin: myUrl.origin,
+        protocol: myUrl.protocol,
+        host: myUrl.host,
+        port: myUrl.port,
+        pathname: myUrl.pathname,
+        search: myUrl.search,
+        searchParams: Object.fromEntries(myUrl.searchParams)
+    }));
+}).listen(3000);
+
+console.log(`Server is running on http://localhost:3000`);
 
