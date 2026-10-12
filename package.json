@@ -1,0 +1,12 @@
+{
+  "name": "tutorial",
+  "version": "0.0.1",
+  "description": "This is Tutorial Genshin",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "tutorial-genshin-test"
+  },
+  "author": "vers123",
+  "license": "MIT"
+}
